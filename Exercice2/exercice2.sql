@@ -26,7 +26,7 @@ SELECT suppliers.CompanyName AS "Fournisseur",
 COUNT(products.ProductID) AS "Nbre produits"
 FROM suppliers
 JOIN products ON products.SupplierID = suppliers.SupplierID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 WHERE Country = "France"
 -- WHERE sert a donner une condition obligatoire à la sélection
 GROUP BY products.SupplierID
@@ -39,7 +39,7 @@ COUNT(orders.OrderID) AS "Nbr commandes"
 -- La fonction COUNT compte le nombre de valeur de ce qui lui est rentré en paramettre
 FROM customers
 JOIN orders ON orders.CustomerID = customers.CustomerID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 WHERE Country = "France"
 -- WHERE sert a donner une condition obligatoire à la sélection
 GROUP BY customers.CompanyName
@@ -53,7 +53,7 @@ customers.Country AS "Pays"
 FROM customers
 JOIN orders ON orders.CustomerID = customers.CustomerID
 JOIN `order details` ON `order details`.OrderID = orders.OrderID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 GROUP BY customers.CustomerID
 -- GROUP BY permet de regrouper par valeur identique
 HAVING CA > 30000
@@ -68,7 +68,7 @@ JOIN orders ON orders.CustomerID = customers.CustomerID
 JOIN `order details` ON `order details`.OrderID = orders.OrderID
 JOIN products ON products.ProductID = `order details`. ProductID
 JOIN suppliers ON suppliers.SupplierID = products.SupplierID
--- Je joint toutes les tables grace à leur clés étrangères en faisant le chemin jusque
+-- Je joint toutes les tables grace à leur clés étrangères et/ou clé primaire en faisant le chemin jusque
 -- la table dont j'ai besoin , à savoir suppliers les 2 tables dont j'ai besoin n'ont 
 -- pas de clés étrangères communes
 WHERE suppliers.CompanyName = "Exotic Liquids"
@@ -80,7 +80,7 @@ SELECT SUM(`order details`.UnitPrice * `order details`.Quantity) AS "Montant Ven
 -- Grace à la fonction SUM j'additionne le total de chaque commande
 FROM `order details`
 JOIN orders ON orders.OrderID = `order details`.OrderID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 WHERE OrderDate LIKE "1997%";
 -- WHERE sert a donner une condition obligatoire à la sélection
 -- Comme c'est une date américaine je dis ici que je veux que OrderDate commence par 1997
@@ -93,7 +93,7 @@ SUM(`order details`.UnitPrice * `order details`.Quantity) AS "Montant Ventes"
 -- Grace à la fonction SUM j'additionne le total de chaque commande
 FROM orders
 JOIN `order details` ON `order details`.OrderID = orders.OrderID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 WHERE OrderDate LIKE "1997%"
 -- WHERE sert a donner une condition obligatoire à la sélection
 -- Comme c'est une date américaine je dis ici que je veux que OrderDate commence par 1997
@@ -105,7 +105,7 @@ SELECT Max(orders.OrderDate) AS "Date de dernière commande"
 -- La fonction Max me permet ici de sélectionner la date la plus réssente étant la plus avancé
 FROM orders
 JOIN customers ON customers.CustomerID = orders.CustomerID
--- Je joint les tables grace à leur clés étrangères grace à JOIN
+-- Je joint les tables grace à leur clés étrangères et/ou clé primaire grace à JOIN
 WHERE customers.CompanyName = "Du monde entier";
 -- WHERE sert a donner une condition obligatoire à la sélection
 
